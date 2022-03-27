@@ -8,11 +8,11 @@ const actions = {
 
     commit("INIT_BEER_LIST", beerPunkApi.data);
   },
-  pushBeerToCartList({ commit }) {
-    commit("PUSH_BEER_TO_CART_LIST");
+  pushBeerToCartList({ commit }, beer) {
+    commit("PUSH_BEER_TO_CART_LIST", beer);
   },
-  deleteBeerToCartList({ commit }) {
-    commit("DELETE_BEER_FROM_CART_LIST");
+  deleteBeerToCartList({ commit }, beer) {
+    commit("DELETE_BEER_FROM_CART_LIST", beer);
   },
 };
 

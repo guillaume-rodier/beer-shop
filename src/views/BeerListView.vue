@@ -1,19 +1,26 @@
 <template>
-  <v-container v-if="showList" :class="['beer-list-view']">
-    <v-row>
-      <v-col cols="12"> BeerListView </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="12">
-        <BeerListComponent :beer-list="beerListData" />
+  <v-container :class="['beer-list-view']">
+    <v-row v-if="beerListData.length > 0" :class="['my-6']">
+      <v-col
+        cols="12"
+        sm="6"
+        md="4"
+        lg="3"
+        v-for="(beer, index) in beerListData"
+        :key="index"
+      >
+        <BeerListComponent
+          :beer="beer"
+          :cart-include-beer="cartIncludeBeer(beer)"
+        />
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
-import BeerListComponent from "@/components/BeerListComponent.vue";
+import { mapGetters } from "vuex";
+import BeerListComponent from "@/components/BeerListComponent";
 
 export default {
   name: "BeerListView",
@@ -23,22 +30,21 @@ export default {
   computed: {
     ...mapGetters({
       beerListData: "beer/getBeerList",
+      cartList: "beer/getCartList",
     }),
   },
   methods: {
-    ...mapActions({
-      initBeerList: "beer/initBeerList",
-    }),
-  },
-  data() {
-    return {
-      showList: true,
-    };
-  },
-  async created() {
-    this.showList = false;
-    await this.initBeerList();
-    this.showList = true;
+    cartIncludeBeer(beerToFind) {
+      var exists = this.cartList.some(function (cart) {
+        return cart.id === beerToFind.id;
+      });
+
+      if (exists) {
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
 };
 </script>

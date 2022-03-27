@@ -47,6 +47,10 @@ export default {
           redirection: "BeerList",
         },
         {
+          title: "Beer Details",
+          redirection: "BeerDetail",
+        },
+        {
           title: "Beer Cart",
           redirection: "BeerCart",
         },
