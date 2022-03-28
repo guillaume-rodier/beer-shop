@@ -49,6 +49,11 @@ export default {
       initBeerList: "beer/initBeerList",
     }),
   },
+  watch: {
+    $route(to) {
+      document.title = to.meta.title || "Beer Shop";
+    },
+  },
   async created() {
     this.showList = false;
     await this.initBeerList();

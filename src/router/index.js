@@ -9,6 +9,10 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "BeerList" */ "@/views/BeerListView"),
+    meta: {
+      auth: true,
+      title: "Beer List",
+    },
   },
   {
     path: "/beer-detail",
@@ -18,6 +22,10 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "BeerDetail" */ "@/views/BeerDetailView.vue"),
+    meta: {
+      auth: true,
+      title: "Beer Details",
+    },
   },
   {
     path: "/beer-cart",
@@ -27,6 +35,10 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "BeerCart" */ "@/views/BeerCartView"),
+    meta: {
+      auth: true,
+      title: "Beer Cart",
+    },
   },
 ];
 
