@@ -1,4 +1,4 @@
-# guillaume-rodier
+# beer-shop
 
 ## Project setup
 ```
