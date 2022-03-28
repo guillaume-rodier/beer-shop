@@ -9,13 +9,12 @@ const mutations = {
     state.beerList = beerList;
   },
   [PUSH_BEER_TO_CART_LIST](state, beer) {
-    state.cartList.push(beer);
+    if (state.cartList.find((item) => item.id === beer.id) === undefined) {
+      state.cartList.push(beer);
+    }
   },
   [DELETE_BEER_FROM_CART_LIST](state, beer) {
-    const index = state.cartList.indexOf(beer);
-    if (index > -1) {
-      state.cartList.splice(index, 1);
-    }
+    state.cartList = state.cartList.filter((item) => item.id !== beer.id);
   },
 };
 

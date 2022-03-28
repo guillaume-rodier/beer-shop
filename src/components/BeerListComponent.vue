@@ -20,12 +20,11 @@
 
         <v-spacer></v-spacer>
 
-        <v-btn icon @click="deleteBeerToCartList(beer)">
-          <v-icon>mdi-minus</v-icon>
-        </v-btn>
-
-        <v-btn icon @click="pushBeerToCartList(beer)">
+        <v-btn v-if="beerInCard" icon @click="pushBeerToCartList(beer)">
           <v-icon>mdi-plus</v-icon>
+        </v-btn>
+        <v-btn v-else icon @click="deleteBeerToCartList(beer)">
+          <v-icon>mdi-minus</v-icon>
         </v-btn>
       </v-card-actions>
     </v-responsive>
@@ -33,7 +32,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "BeerListComponent",
@@ -42,7 +41,15 @@ export default {
       type: Object,
       required: false,
       default() {
-        return {};
+        return {
+          name: "",
+          description: "",
+          image_url: "",
+          volume: {
+            value: 0,
+            unit: "",
+          },
+        };
       },
     },
     cartIncludeBeer: {
@@ -52,6 +59,9 @@ export default {
     },
   },
   computed: {
+    ...mapGetters({
+      cartList: "beer/getCartList",
+    }),
     classTextOrdered() {
       if (this.cartIncludeBeer) {
         return "textOrdered";
@@ -65,6 +75,11 @@ export default {
       } else {
         return "Not ordered";
       }
+    },
+    beerInCard() {
+      return (
+        this.cartList.find((item) => item.id === this.beer.id) === undefined
+      );
     },
     beerVolume() {
       return this.beer.volume.value + " " + this.beer.volume.unit;

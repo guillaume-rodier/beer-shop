@@ -58,7 +58,33 @@ export default {
       type: Object,
       required: false,
       default() {
-        return {};
+        return {
+          name: "",
+          description: "",
+          image_url: "",
+          volume: {
+            value: 0,
+            unit: "",
+          },
+          ingredients: {
+            hops: [
+              {
+                name: "",
+                amount: "",
+                value: 0,
+                add: "",
+              },
+            ],
+            malt: [
+              {
+                name: "",
+                amount: "",
+                value: 0,
+                add: "",
+              },
+            ],
+          },
+        };
       },
     },
     cartIncludeBeer: {
@@ -98,9 +124,6 @@ export default {
         ingredient.add
       );
     },
-  },
-  created() {
-    console.log("this.beer:", this.beer);
   },
 };
 </script>
